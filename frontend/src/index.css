@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shared light/dark design tokens (RGB channels support Tailwind opacity modifiers). */
+:root {
+  --bg: 248 250 252;
+  --navbar: 255 255 255;
+  --surface: 255 255 255;
+  --subtle: 241 245 249;
+  --selected: 239 246 255;
+  --line: 226 232 240;
+  --ink: 15 23 42;
+  --rank: 51 65 85;
+  --muted: 100 116 139;
+  --placeholder: 148 163 184;
+
+  --accent: 37 99 235;
+  --accent-hover: 29 78 216;
+  --accent-fg: 255 255 255;
+  --accent-soft: 239 246 255;
+  --accent-text: 37 99 235;
+
+  --easy: 21 128 61;
+  --easy-soft: 240 253 244;
+  --medium: 180 83 9;
+  --medium-soft: 255 251 235;
+  --hard: 220 38 38;
+  --hard-soft: 254 242 242;
+
+  --sun: 180 83 9;
+  --sun-soft: 254 243 199;
+  --sun-text: 180 83 9;
+  --leaf: 21 128 61;
+  --leaf-soft: 240 253 244;
+  --leaf-text: 21 128 61;
+}
+
+.dark {
+  --bg: 15 23 42;
+  --navbar: 17 24 39;
+  --surface: 30 41 59;
+  --subtle: 51 65 85;
+  --selected: 30 58 95;
+  --line: 51 65 85;
+  --ink: 241 245 249;
+  --rank: 226 232 240;
+  --muted: 148 163 184;
+  --placeholder: 100 116 139;
+
+  --accent: 59 130 246;
+  --accent-hover: 96 165 250;
+  --accent-fg: 255 255 255;
+  --accent-soft: 30 58 95;
+  --accent-text: 59 130 246;
+
+  --easy: 74 222 128;
+  --easy-soft: 20 83 45;
+  --medium: 251 191 36;
+  --medium-soft: 120 53 15;
+  --hard: 248 113 113;
+  --hard-soft: 127 29 29;
+
+  --sun: 251 191 36;
+  --sun-soft: 120 53 15;
+  --sun-text: 251 191 36;
+  --leaf: 74 222 128;
+  --leaf-soft: 20 83 45;
+  --leaf-text: 74 222 128;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    transition-property: color, background-color, border-color;
+    transition-duration: 150ms;
+    transition-timing-function: ease;
+  }
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: rgb(var(--accent) / 0.25);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--line)) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgb(var(--line));
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
